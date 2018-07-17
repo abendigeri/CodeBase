@@ -73,6 +73,7 @@ def getInvestments(total_amount, data):
 
     model += lp_variables[5] + lp_variables[3] - lp_variables[1] <= 0
 
+    # Solving the Model
     model.solve()
 
     pulp.LpStatus[model.status]
