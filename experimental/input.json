@@ -1,0 +1,45 @@
+{
+    "data": {
+        "investments": [
+            "A",
+            "B",
+            "C",
+            "D",
+            "E",
+            "F"
+        ],
+        "returns": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6
+        ],
+        "risks": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6
+        ]
+    },
+    "constraints": {
+        "exclusions": [
+            "A",
+            "B"
+        ],
+        "commitments": [
+            {
+                "investment": "A",
+                "limit": 20
+            },
+            {
+                "investment": "B",
+                "limit": 30
+            }
+        ],
+        "average_return": 5
+    }
+}
