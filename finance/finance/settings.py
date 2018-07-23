@@ -43,6 +43,10 @@ INSTALLED_APPS = [
     # Optimize application
     'optimize.apps.OptimizeConfig',
 
+    'sqlserver_ado.sql_app',
+
+    # 'sqlserver'
+
 ]
 
 MIDDLEWARE = [
@@ -80,9 +84,30 @@ WSGI_APPLICATION = 'finance.wsgi.application'
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
 DATABASES = {
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    # }
+
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'NAME': 'REST_DB',
+        'ENGINE': 'sql_server.pyodbc',
+        # 'ENGINE': 'sqlserver_ado',
+        # 'HOST': r'DESKTOP-3SSTTPB\SQLEXPRESS',
+        # 'PORT': '1433',
+        'HOST': r'localhost\sqlexpress',
+        # 'HOST': '127.0.0.1',
+        'USER': 'sa',
+        'PASSWORD': 'Google@321',
+        'OPTIONS': {
+            'DRIVER': 'ODBC Driver 13 for SQL Server',
+        },
+
+        # 'OPTIONS': {
+        #     'provider': 'SQLCLI10',
+        #     # 'provider': 'SQLNCLI11',
+        #     'use_legacy_date_fields': 'True'
+        # }
     }
 }
 

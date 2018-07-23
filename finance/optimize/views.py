@@ -24,6 +24,8 @@ from rest_framework.response import Response
 
 import linearoptimization
 
+from django.db import connection
+
 
 class InvestmentList(generics.ListCreateAPIView):
     queryset = Investment.objects.all()
@@ -55,9 +57,52 @@ def investment_list(request):
         # print(type(request.data))
         # x = request.data
 
-        linearoptimization.getInvestments(
+        response = linearoptimization.getInvestments(
             total_amount=1000000000, data=request.data)
+
+        print(response)
+        # print(x["constraints"]["commitments"])
+        return Response(response, status=status.HTTP_201_CREATED)
+
+
+@csrf_exempt
+@api_view(['POST'])
+def test_post(request):
+    if request.method == 'POST':
+
+        # print(type(request.data))
+        # x = request.data
 
         # print(x)
         # print(x["constraints"]["commitments"])
+
+        print(request.data)
+
+        cur = connection.cursor()
+
+        # print(cur)
+
+        # rows = cur.execute("{CALL dbo.GetInvestments}")
+
+        # local_cursor.execute("{call dbo.GetAlarmEventHistoryFrequency_TimeRange(?,?)}",(tstart),(tend))
+
+        params = ('FirstMortages')
+        cur.execute("{CALL dbo.SpecificInvestment(@Risk=?)}", (3))
+
+        # sql = """\
+        # EXEC dbo.SpecificInvestment @Investment=?
+        # """
+        # params = ('FirstMortages')
+        # cur.execute(sql, params)
+
+        # print(rows)
+
+        rows = cur.fetchall()
+        while rows:
+            print(rows)
+            if cur.nextset():
+                rows = cur.fetchall()
+            else:
+                rows = None
+
         return Response(request.data, status=status.HTTP_201_CREATED)

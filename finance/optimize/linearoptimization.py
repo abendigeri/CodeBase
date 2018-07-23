@@ -7,8 +7,10 @@ from optimize.models import Investment
 
 def getInvestments(total_amount, data):
     # print(data['constraints'])
-
+    response = {}
     commitments = data['constraints']['commitments']
+
+    total_amount = data['constraints']['total_amount']
 
     average_return = data['constraints']['average_return']
 
@@ -79,12 +81,13 @@ def getInvestments(total_amount, data):
     pulp.LpStatus[model.status]
 
     for idx, i in enumerate(lp_variables):
-        print(str(i)+" = {}".format(i.varValue))
+        # print(str(i)+" = {}".format(i.varValue))
+        response[str(i)] = i.varValue
 
     print(pulp.value(model.objective))
-
+    response['Profit'] = pulp.value(model.objective)
     pass
-
+    return response
 
 # X1 = pulp.LpVariable('x1', lowBound=0, cat='Integer')
 # X2 = pulp.LpVariable('x2', lowBound=0, cat='Integer')

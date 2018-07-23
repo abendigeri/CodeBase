@@ -19,7 +19,11 @@ urlpatterns = [
 
     url(r'^test/$',
         views.investment_list,
-        name='test-api')
+        name='test-api'),
+
+    url(r'^testpost/$',
+        views.test_post,
+        name='test-post')
 
 
 ]
